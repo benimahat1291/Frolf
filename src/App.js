@@ -2,7 +2,7 @@
 import './App.css';
 import Home from './pages/home/Home';
 import Navbar from './components/navbar/Navbar';
-import { Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NewGame from './pages/newGame/NewGame';
 import { animiatePresence} from "framer-motion"
 
