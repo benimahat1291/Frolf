@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+// import {useState} from "react";
 import './App.css';
+import Home from './pages/home/Home';
+import Navbar from './components/navbar/Navbar';
+import { Switch, Route, NavLink } from "react-router-dom";
+import NewGame from './pages/newGame/NewGame';
+import { animiatePresence} from "framer-motion"
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <div className="app">
+            <div className="frolferApp">
+                <Navbar />
+                <animiatePresence>
+                    <Switch >
+                        <Route path="/newgame" component={NewGame} exact />
+                        <Route path="/" component={Home} />
+                    </Switch>
+                </animiatePresence>
+            </div>
+        </div>
+
+    );
 }
 
 export default App;
