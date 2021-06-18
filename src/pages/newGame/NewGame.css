@@ -6,4 +6,58 @@
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 0 0 5px 5px;
+    display: grid;
+    place-items: center;
+}
+
+.newGame__form {
+   display: flex;
+   width: 50%;
+   height: 60%;
+   align-items: space-between;
+   justify-content: space-between;
+}
+
+.newGame__numberInput {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 5rem 0;
+}
+
+.newGame__textInput .MuiFormLabel-root {
+    font-size: 1.5rem !important;
+}
+
+.MuiInputBase-input {
+    height: 2.5rem !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+.MuiInputBase-root {
+    font-size: 2rem !important;
+    padding-top: 0.5rem;
+}
+
+.MuiFormLabel-root{
+    color: orange !important
+}
+
+.MuiFormLabel-root .Mui-focused{
+    color: whitesdf !important
+}
+
+.MuiInputBase-input:focus {
+   outline-color: white !important
+}
+
+.MuiInput-underline:before {
+    border-bottom: 2px solid lightgray !important;
+}
+.MuiInput-underline:after {
+    border-bottom: 2px solid orange !important;
+}
+
+.newGame__saveGame {
+    width: 100%;
 }

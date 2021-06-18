@@ -4,7 +4,7 @@ import "./StartButton.css"
 const Startbutton = () => {
     return (
 
-        <button className="slide_from_left">Start Game</button>
+        <button className="slide_from_left">New Game</button>
 
     )
 }
