@@ -4,17 +4,18 @@ import { motion } from "framer-motion"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase'
 
+
 const AddPlayers = () => {
     const [user, loading] = useAuthState(auth)
     const [userGames, setUserGames] = useState([])
-    const [playerInputArr, setPlayerInputArr] = useState()
+    let arry = []
 
     useEffect(() => {
         getGames()
     }, [])
 
     const getGames = () => {
-        db.collection("games").where("user", "==", user.email).onSnapshot((GamesSnapshot) => {
+        db.collection("games").where("user", "==", user.email).orderBy("timestamp", "asc").onSnapshot((GamesSnapshot) => {
             setUserGames(
                 GamesSnapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -26,24 +27,19 @@ const AddPlayers = () => {
         })
     }
 
-    const makePlayersArr = async () => {
-        const num = await userGames[0].playerCount;
-        const int = parseInt(num);
-        const arry = []
-        // console.log(int)
-        for(let i=1; i < (int+1); i++) {
+    const makePlayersArr = (num) => {
+        const playerCount = num;
+        const int = parseInt(playerCount);
+        for (let i = 1; i < (int + 1); i++) {
             arry.push(`Player ${i}`)
         }
-       console.log(arry)
-       if(int === arry.length){
-        //   return setPlayerInputArr(arry)
-       }
-        
     }
-    
-    if(userGames.length > 1) makePlayersArr()
 
-    
+
+    if (userGames.length > 0) {
+        makePlayersArr(userGames[userGames.length-1].playerCount)
+        console.log(userGames)
+    }
 
     return (
         <div>
@@ -52,6 +48,10 @@ const AddPlayers = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}>
+
+                {arry.map((player) => (
+                    <div><h1>{player}</h1></div>
+                ))}
             </motion.div>
         </div>
     )
