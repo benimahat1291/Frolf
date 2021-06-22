@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import "./GameRounds.css"
 import { motion } from "framer-motion"
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth, db } from '../../firebase'
+import { db } from '../../firebase'
 import { useParams, useHistory } from 'react-router-dom'
 
 
 
 const GameRounds = () => {
     let history = useHistory()
-    const [user, loading] = useAuthState(auth)
     const [gameData, setGameData] = useState()
     const { gameId, round } = useParams()
     const [playersArr, setPlayersArr] = useState()
@@ -20,7 +18,7 @@ const GameRounds = () => {
 
     useEffect(() => {
         getGames();
-    }, [])
+    })
 
 
     const getGames = () => {
@@ -101,7 +99,7 @@ const GameRounds = () => {
                     <div>
                         <button
                             onClick={handleLastPage}
-                            style={{ display: round == 1 ? "none" : "block" }}>
+                            style={{ display: (round == 1 ? "none" : "block" )}}>
                             Back
                         </button>
                     </div>
@@ -110,14 +108,14 @@ const GameRounds = () => {
                       
                             <button
                                 onClick={handleNextPage}
-                                style={{ display: round == gameData[0].rounds ? "none" : "block" }}>
+                                style={{ display: round === gameData[0].rounds ? "none" : "block" }}>
                                 Next
                             </button>
 
                             
                             <button
                                 onClick={handleResultsPage}
-                                style={{ display: round == gameData[0].rounds ? "block" : "none" }}>
+                                style={{ display: round === gameData[0].rounds ? "block" : "none" }}>
                                 Done
                             </button>
                     </div>

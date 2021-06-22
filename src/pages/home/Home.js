@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import "./Home.css"
 import NetImg from "../../images/net.png"
 import StartButton from '../../components/buttons/StartButton'
 import { useHistory } from "react-router-dom"
-import { auth, db } from "../../firebase.js"
+import { auth} from "../../firebase.js"
 import { useAuthState } from "react-firebase-hooks/auth"
-import firebase from "firebase"
 
 const Home = () => {
     const [discToss, setDiscToss] = useState(false);
     let history = useHistory();
     const [user, loading] = useAuthState(auth);
+    console.log(user)
 
     const startGame = () => {
         if (discToss) {

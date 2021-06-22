@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 import './App.css';
 import Home from './pages/home/Home';
 import Navbar from './components/navbar/Navbar';
 import { Switch, Route } from "react-router-dom";
 import NewGame from './pages/newGame/NewGame';
-import { motion, AnimatePresence } from "framer-motion"
+import {AnimatePresence } from "framer-motion"
 import Login from './pages/login/Login';
 import { auth, db } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';

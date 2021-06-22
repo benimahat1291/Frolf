@@ -11,7 +11,7 @@ import firebase from "firebase"
 const NewGame = () => {
 
     let history = useHistory()
-    const [user, loading] = useAuthState(auth)
+    const [user] = useAuthState(auth)
     const [playersDisplay, setPlayersDisplay] = useState(false)
     const [gameForm, setGameForm] = useState({
         name: "",
@@ -44,7 +44,6 @@ const NewGame = () => {
             rounds.push({round: i, score: 0})
         }
 
-        let playersArr = [];
         setPlayersForm({...playersForm, [e.target.name]: {name:e.target.value, scores: rounds}})
    
 
@@ -114,7 +113,7 @@ const NewGame = () => {
                 id={`player${val}`}
                 value={playersForm[val["name"]]}
                 name={val}
-                label={`player ${val}`}
+                label={`player ${index}`}
                 onChange={handlePlayersInputChange}
                 required
             />
