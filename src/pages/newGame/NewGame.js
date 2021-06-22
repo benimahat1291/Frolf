@@ -4,7 +4,7 @@ import "./NewGame.css"
 import { motion } from "framer-motion"
 import { auth, db } from '../../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import AddPlayers from '../../components/buttons/AddPlayers'
+import uuid from 'react-uuid'
 import { useHistory } from "react-router-dom"
 import firebase from "firebase"
 
@@ -18,11 +18,11 @@ const NewGame = () => {
         par: "",
         rounds: "",
         playerCount: "",
-        players: {}
     })
 
-    const [playersForm, setPlayersForm] = useState({
-    })
+    const gameId = uuid()
+
+    const [playersForm, setPlayersForm] = useState({})
 
     const playerElements = [];
 
@@ -39,18 +39,26 @@ const NewGame = () => {
     const handlePlayersInputChange = (e) => {
         e.preventDefault();
         const count = parseInt(gameForm.rounds)
-        console.log("count", count)
         let rounds = []
         for(let i = 1; i < count+1; i++){
             rounds.push({round: i, score: 0})
         }
-        setPlayersForm({...playersForm, [e.target.name]: {name: e.target.value, scores: rounds}})
+
+        let playersArr = [];
+        setPlayersForm({...playersForm, [e.target.name]: {name:e.target.value, scores: rounds}})
+   
+
+        // setPlayersForm({...playersForm, [e.target.name]:{name:e.target.value, rounds}})
+        console.log("pform", playersForm)
     }
-    console.log(gameForm)
-    console.log(playersForm)
+ 
 
     const toggleDispaly = () => {
-        if(playersDisplay === false){
+        if(playersDisplay === false
+            && gameForm.name !== ""
+            && gameForm.par !== ""
+            && gameForm.rounds !== ""
+            && gameForm.playerCount !== ""){
             setPlayersDisplay(true)
             setPlayersForm({})
         } else {
@@ -59,22 +67,36 @@ const NewGame = () => {
     }
 
     const saveGame = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
+        console.log(Object.keys(playersForm).length, gameForm.playerCount )
+        let playersArr = []
+                let playersArrLength = Object.keys(playersForm).length
+        for(let i= 1; i < playersArrLength + 1; i++){
+            playersArr.push(playersForm[i])
+        }
+        
 
-        // if (gameName !== "" && gameDificulty !== "" && gamePlayerCount !== "" && gameRounds !== "") {
-        //     db.collection("games").add({
-        //         user: user.email,
-        //         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        //         gameName,
-        //         gameDificulty,
-        //         gameRounds,
-        //         gamePlayerCount
-        //     })
-        //     history.push("./newgame/addplayers")
+        if(Object.keys(playersForm).length === parseInt(gameForm.playerCount)){
 
-        // } else {
-        //     return alert("No empty fields")
-        // }
+            db.collection("games").add({
+                gameId: gameId,
+                user: user.email,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                gameName: gameForm.name,
+                parValue: gameForm.par,
+                rounds: gameForm.rounds,
+                players: playersArr
+            })
+
+            db.collection("players").add({
+                gameId: gameId,
+                players: playersArr
+            })
+            history.push(`/game/${gameId}/1`)
+        }
+    
+
+       
 
     }
 
@@ -84,17 +106,17 @@ const NewGame = () => {
         for (let i = 1; i < count + 1; i++) {
             playerIndexArr.push(i)
         }
-        console.log("indexARr", playerIndexArr)
 
         for (const [index, val] of playerIndexArr.entries()) {
             playerElements.push(
                 <TextField
                 style={{ width: "100%" }}
                 id={`player${val}`}
-                value={playersForm[`p${val}.name`]}
-                name={`p${val}`}
+                value={playersForm[val["name"]]}
+                name={val}
                 label={`player ${val}`}
                 onChange={handlePlayersInputChange}
+                required
             />
             )
         }  
@@ -102,14 +124,10 @@ const NewGame = () => {
      
     }
 
-    console.log("playerEle", playerElements)
 
 
 
 
-
-
-    // console.log(gameName, gameDificulty, gamePlayerCount, gameRounds, playerLables)
 
     return (
         <motion.div
@@ -167,13 +185,14 @@ const NewGame = () => {
                      e.preventDefault()
                      toggleDispaly()
                      }}>
-                     <AddPlayers />
+                     <button>Next</button>
                  </div>
 
              </form>) : (
                  <form>
                      {playerElements}
                      <button onClick={toggleDispaly}> back</button>
+                     <button onClick = {saveGame}> Next</button>
                  </form>
              )
             }

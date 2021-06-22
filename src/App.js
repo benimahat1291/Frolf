@@ -9,7 +9,8 @@ import Login from './pages/login/Login';
 import { auth, db } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from "firebase"
-import AddPlayers from "./pages/newGame/AddPlayers";
+import GameRounds from "./pages/gameRounds/GameRounds";
+import GameResults from "./pages/gameResults/GameResults";
 
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
                 <Navbar />
                 <AnimatePresence>
                     <Switch >
-                        <Route path="/newgame/addplayers" component={AddPlayers} exact />
+                    <Route path="/game/:gameId/results" component={GameResults} exact />
+                        <Route path="/game/:gameId/:round" component={GameRounds} exact />
                         <Route path="/newgame" component={NewGame} exact />
                         <Route path="/login" component={Login} exact />
                         <Route path="/" component={Home} />

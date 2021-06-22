@@ -1,0 +1,78 @@
+.gameRound {
+    background-image: url("../../images/hills2.png");
+    background-color: #3B8C4B;
+    width: 100%;
+    height: 720px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gameRound__round {
+    height: 100px;
+    width: 100%;
+    color: white;
+    font-family: 'Play', sans-serif;
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content:flex-end;
+}
+
+.gameRound__roundTracker {
+    width: 2rem;
+    text-align: center;
+    padding-right: 2rem;
+    align-self: flex-end;
+}
+
+.gameRound__roundTrackerCur {
+    border-bottom: 3px solid white;
+}
+
+.gameRound__playersMany{
+    height: 400px;
+    width: 80%;
+    /* border: 1px solid black; */
+    
+    overflow: scroll;
+}
+
+.gameRound__playersFew{
+    height: 400px;
+    width: 80%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+    
+}
+
+.gameRound__playersCard {
+    height: 70px;
+    width: 90%;
+    background-color: rgba(241,243,248, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    margin-bottom: 5%;
+}
+
+
+
+.gameRound__buttons {
+    height: 75px;
+    width: 80%;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gameRound__buttons > div > button {
+    font-size: 1.5rem;
+    
+}
