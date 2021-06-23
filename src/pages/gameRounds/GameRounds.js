@@ -42,9 +42,6 @@ const GameRounds = () => {
     }
 
     if (playersArr && gameData) {
-
-        console.log("players", playersArr[0][0])
-        console.log("gameData", gameData[0].rounds)
         const roundCount = parseInt(gameData[0].rounds);
         for (let i = 1; i <= roundCount; i++) {
             roundsArr.push(i)

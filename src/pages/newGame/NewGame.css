@@ -60,4 +60,33 @@
 
 .newGame__saveGame {
     width: 100%;
+    padding-top: 10rem;
+    display: flex;
+    justify-content: center;
+}
+
+.newGame__addPlayersFew {
+    height: 400px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.newGame__addPlayers {
+    height: 350px;
+    margin-bottom: 50px;
+    overflow: scroll;
+}
+
+.newGame__addPlayer {
+    margin-bottom: 1rem
+}
+
+
+
+.newGame__buttons {
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
 }

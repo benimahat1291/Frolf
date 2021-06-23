@@ -27,37 +27,37 @@ const NewGame = () => {
     const playerElements = [];
 
     useEffect(() => {
-        
+
     }, [gameForm])
 
 
     const handleInputChange = (e) => {
         e.preventDefault();
-        setGameForm({...gameForm, [e.target.name]: e.target.value})
+        setGameForm({ ...gameForm, [e.target.name]: e.target.value })
     }
 
     const handlePlayersInputChange = (e) => {
         e.preventDefault();
         const count = parseInt(gameForm.rounds)
         let rounds = []
-        for(let i = 1; i < count+1; i++){
-            rounds.push({round: i, score: 0})
+        for (let i = 1; i < count + 1; i++) {
+            rounds.push({ round: i, score: 0 })
         }
 
-        setPlayersForm({...playersForm, [e.target.name]: {name:e.target.value, scores: rounds}})
-   
+        setPlayersForm({ ...playersForm, [e.target.name]: { name: e.target.value, scores: rounds } })
+
 
         // setPlayersForm({...playersForm, [e.target.name]:{name:e.target.value, rounds}})
         console.log("pform", playersForm)
     }
- 
+
 
     const toggleDispaly = () => {
-        if(playersDisplay === false
+        if (playersDisplay === false
             && gameForm.name !== ""
             && gameForm.par !== ""
             && gameForm.rounds !== ""
-            && gameForm.playerCount !== ""){
+            && gameForm.playerCount !== "") {
             setPlayersDisplay(true)
             setPlayersForm({})
         } else {
@@ -67,15 +67,15 @@ const NewGame = () => {
 
     const saveGame = (e) => {
         e.preventDefault();
-        console.log(Object.keys(playersForm).length, gameForm.playerCount )
+        console.log(Object.keys(playersForm).length, gameForm.playerCount)
         let playersArr = []
-                let playersArrLength = Object.keys(playersForm).length
-        for(let i= 1; i < playersArrLength + 1; i++){
+        let playersArrLength = Object.keys(playersForm).length
+        for (let i = 1; i < playersArrLength + 1; i++) {
             playersArr.push(playersForm[i])
         }
-        
 
-        if(Object.keys(playersForm).length === parseInt(gameForm.playerCount)){
+
+        if (Object.keys(playersForm).length === parseInt(gameForm.playerCount)) {
 
             db.collection("games").add({
                 gameId: gameId,
@@ -93,13 +93,13 @@ const NewGame = () => {
             })
             history.push(`/game/${gameId}/1`)
         }
-    
 
-       
+
+
 
     }
 
-    if(gameForm.playerCount !== "" && gameForm.rounds !== "") {
+    if (gameForm.playerCount !== "" && gameForm.rounds !== "") {
         const count = parseInt(gameForm.playerCount)
         let playerIndexArr = []
         for (let i = 1; i < count + 1; i++) {
@@ -108,19 +108,22 @@ const NewGame = () => {
 
         for (const [index, val] of playerIndexArr.entries()) {
             playerElements.push(
-                <TextField
-                style={{ width: "100%" }}
-                id={`player${val}`}
-                value={playersForm[val["name"]]}
-                name={val}
-                label={`player ${index}`}
-                onChange={handlePlayersInputChange}
-                required
-            />
-            )
-        }  
+                <div className="newGame__addPlayer">
+                    <TextField
+                        style={{ width: "100%" }}
+                        id={`player${val}`}
+                        value={playersForm[val["name"]]}
+                        name={val}
+                        label={`player ${val}`}
+                        onChange={handlePlayersInputChange}
+                        required
+                    />
+                </div>
 
-     
+            )
+        }
+
+
     }
 
 
@@ -134,69 +137,73 @@ const NewGame = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
-               
+
             <div className="newGame__form">
-            {!playersDisplay ?
-    (             <form>
-                 <div className="newGame__textInput">
-                     <TextField
-                         style={{ width: "100%" }}
-                         id="name"
-                         name="name"
-                         value={gameForm.name}
-                         label="Game Name"
-                         onChange={handleInputChange}
-                     />
-                 </div>
-                 <div className="newGame__numberInput">
-                     <TextField
-                         style={{ width: "30%" }}
-                         id="par"
-                         type="number"
-                         name="par"
-                         value={gameForm.par}
-                         label="Par Value"
-                         
-                         onChange={handleInputChange}
-                     />
-                     <TextField
-                         style={{ width: "30%" }}
-                         id="rounds"
-                         type="number"
-                         name="rounds"
-                         value={gameForm.rounds}
-                         label="Rounds"
-                         onChange={handleInputChange}
-                         
-                     />
+                {!playersDisplay ?
+                    (<form>
+                        <div className="newGame__textInput">
+                            <TextField
+                                style={{ width: "100%" }}
+                                id="name"
+                                name="name"
+                                value={gameForm.name}
+                                label="Game Name"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className="newGame__numberInput">
+                            <TextField
+                                style={{ width: "30%" }}
+                                id="par"
+                                type="number"
+                                name="par"
+                                value={gameForm.par}
+                                label="Par Value"
 
-                     <TextField
-                         style={{ width: "30%" }}
-                         id="count"
-                         type="number"
-                         name="playerCount"
-                         value={gameForm.playerCount}
-                         label="Players"
-                         onChange={handleInputChange}
-                     />
-                 </div>
-                 <div className="newGame__saveGame" onClick={(e) => {
-                     e.preventDefault()
-                     toggleDispaly()
-                     }}>
-                     <button>Next</button>
-                 </div>
+                                onChange={handleInputChange}
+                            />
+                            <TextField
+                                style={{ width: "30%" }}
+                                id="rounds"
+                                type="number"
+                                name="rounds"
+                                value={gameForm.rounds}
+                                label="Rounds"
+                                onChange={handleInputChange}
 
-             </form>) : (
-                 <form>
-                     {playerElements}
-                     <button onClick={toggleDispaly}> back</button>
-                     <button onClick = {saveGame}> Next</button>
-                 </form>
-             )
-            }
+                            />
 
-               
+                            <TextField
+                                style={{ width: "30%" }}
+                                id="count"
+                                type="number"
+                                name="playerCount"
+                                value={gameForm.playerCount}
+                                label="Players"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className="newGame__saveGame" onClick={(e) => {
+                            e.preventDefault()
+                            toggleDispaly()
+                        }}>
+                            <button>Next</button>
+                        </div>
+
+                    </form>) : (
+                        <form>
+                            <div className={parseInt(gameForm.playerCount) <= 3 ? "newGame__addPlayersFew" : "newGame__addPlayers"}>
+                                {playerElements}
+                            </div>
+
+                            <div className="newGame__buttons">
+                                <button onClick={toggleDispaly}> back</button>
+                                <button onClick={saveGame}> Next</button>
+                            </div>
+
+                        </form>
+                    )
+                }
             </div>
         </motion.div>
     )
