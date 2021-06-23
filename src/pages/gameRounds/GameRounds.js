@@ -13,6 +13,8 @@ const GameRounds = () => {
     const [gameData, setGameData] = useState()
     const { gameId, round } = useParams()
     const [playersArr, setPlayersArr] = useState()
+    const [playerScore, setPlayerScore] = useState()
+    const [number, setNumber] = useState(0)
 
     useEffect(() => {
         getGames();
@@ -34,8 +36,38 @@ const GameRounds = () => {
                     doc.data().players,
                 ]))
             )
+            let playersCount =  []
+            GamesSnapshot.docs.forEach((doc) => ([
+                doc.data().players.forEach((player) =>{
+                   playersCount.push({name: player["name"], scores: player["scores"], score: player["score"]})
+                })
+            ]))
+            setPlayerScore(playersCount)
         })
     }
+
+  
+    
+
+    const handleScoreChange = (e) => {
+        e.preventDefault();
+            let playerTemp = playerScore
+            playerTemp.find(obj => obj.name === e.target.name).score = e.target.value
+            setPlayerScore([...playerTemp])
+            setNumber(number+1)
+    
+            console.log(playerScore)
+        
+       
+
+        console.log(playerScore)
+        
+
+
+    }
+    
+    console.log(playerScore)
+
 
     const handleLastPage = () => {
         let nextRound = parseInt(round) - 1
@@ -46,13 +78,14 @@ const GameRounds = () => {
         let nextRound = parseInt(round) + 1
         history.push(`../${gameId}/${nextRound}`)
         if (playersArr) {
-            console.log(playersArr[0][0][0]["scores"])
+            console.log(playerScore)
         }
     }
 
     const handleResultsPage = () => {
         history.push(`../${gameId}/results`)
     }
+    
 
     return (
         <motion.div
@@ -68,9 +101,9 @@ const GameRounds = () => {
                 </div>
             </div>
 
-            {playersArr &&
-                <div className={playersArr[0][0].length > 4 ? "gameRound__playersMany" : "gameRound__playersFew"}>
-                    {playersArr[0][0].map((player) => (
+            {playerScore &&
+                <div className={playerScore.length > 4 ? "gameRound__playersMany" : "gameRound__playersFew"}>
+                    {playerScore.map((player) => (
                         <div className="gameRound__playersCard" key={player.name}>
                             <div className="gameRound__playerCardName">
                                 <h1>{player.name.toUpperCase()}</h1>
@@ -80,7 +113,12 @@ const GameRounds = () => {
                                 <h1>{player.scores[0].score}</h1>
                             </div>
                             <div className="gameRound__playerCardScore">
-                            <input className="gameRound__scoreInput" type="number" pattern="[0-9]" inputmode="numeric" id="quantity" name="quantity" min="0" max="20" value="0"/>
+                                <input className="gameRound__scoreInput"
+                                    type="number" pattern="[0-9]" inputmode="numeric"
+                                    id="quantity" name={player["name"]} min={0} max={20} value={player.score}
+                                    onChange={(e) => {
+                                        handleScoreChange(e)
+                                    }} />
                             </div>
                         </div>
                     ))}

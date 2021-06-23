@@ -44,7 +44,7 @@ const NewGame = () => {
             rounds.push({ round: i, score: 0 })
         }
 
-        setPlayersForm({ ...playersForm, [e.target.name]: { name: e.target.value, scores: rounds } })
+        setPlayersForm({ ...playersForm, [e.target.name]: { name: e.target.value, scores: rounds, score: 0 }  })
 
 
         // setPlayersForm({...playersForm, [e.target.name]:{name:e.target.value, rounds}})
@@ -89,7 +89,7 @@ const NewGame = () => {
 
             db.collection("players").add({
                 gameId: gameId,
-                players: playersArr
+                players: playersArr,
             })
             history.push(`/game/${gameId}/1`)
         }
