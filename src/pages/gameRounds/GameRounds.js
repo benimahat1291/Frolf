@@ -3,7 +3,9 @@ import "./GameRounds.css"
 import { motion } from "framer-motion"
 import { db } from '../../firebase'
 import { useParams, useHistory } from 'react-router-dom'
-
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import NumericInput from 'react-numeric-input';
 
 
 const GameRounds = () => {
@@ -11,15 +13,10 @@ const GameRounds = () => {
     const [gameData, setGameData] = useState()
     const { gameId, round } = useParams()
     const [playersArr, setPlayersArr] = useState()
-    let roundsArr = []
-
-
-
 
     useEffect(() => {
         getGames();
-    })
-
+    }, [])
 
     const getGames = () => {
         db.collection("games").where("gameId", "==", gameId).onSnapshot((GamesSnapshot) => {
@@ -37,17 +34,7 @@ const GameRounds = () => {
                     doc.data().players,
                 ]))
             )
-
         })
-    }
-
-    if (playersArr && gameData) {
-        const roundCount = parseInt(gameData[0].rounds);
-        for (let i = 1; i <= roundCount; i++) {
-            roundsArr.push(i)
-        }
-
-
     }
 
     const handleLastPage = () => {
@@ -58,16 +45,16 @@ const GameRounds = () => {
     const handleNextPage = () => {
         let nextRound = parseInt(round) + 1
         history.push(`../${gameId}/${nextRound}`)
+        if (playersArr) {
+            console.log(playersArr[0][0][0]["scores"])
+        }
     }
 
     const handleResultsPage = () => {
         history.push(`../${gameId}/results`)
     }
 
-
-
     return (
-
         <motion.div
             className="gameRound"
             initial={{ opacity: 0 }}
@@ -80,14 +67,22 @@ const GameRounds = () => {
                     <h1 className="gameRound__roundTrackerTot">{gameData && gameData[0].rounds}</h1>
                 </div>
             </div>
+
             {playersArr &&
                 <div className={playersArr[0][0].length > 4 ? "gameRound__playersMany" : "gameRound__playersFew"}>
-
                     {playersArr[0][0].map((player) => (
                         <div className="gameRound__playersCard" key={player.name}>
-                            <h1>{player.name.toUpperCase()}</h1>
-                        </div>
+                            <div className="gameRound__playerCardName">
+                                <h1>{player.name.toUpperCase()}</h1>
+                            </div>
 
+                            <div className="gameRound__playerCardTotal">
+                                <h1>{player.scores[0].score}</h1>
+                            </div>
+                            <div className="gameRound__playerCardScore">
+                            <input type="number" pattern="[0-9]" inputmode="numeric" id="quantity" name="quantity" min="0" max="20" value="0"/>
+                            </div>
+                        </div>
                     ))}
                 </div>
             }
@@ -96,41 +91,24 @@ const GameRounds = () => {
                     <div>
                         <button
                             onClick={handleLastPage}
-                            style={{ display: (round == 1 ? "none" : "block" )}}>
+                            style={{ display: (round == 1 ? "none" : "block") }}>
                             Back
                         </button>
                     </div>
-
                     <div>
-                      
-                            <button
-                                onClick={handleNextPage}
-                                style={{ display: round === gameData[0].rounds ? "none" : "block" }}>
-                                Next
-                            </button>
-
-                            
-                            <button
-                                onClick={handleResultsPage}
-                                style={{ display: round === gameData[0].rounds ? "block" : "none" }}>
-                                Done
-                            </button>
+                        <button
+                            onClick={handleNextPage}
+                            style={{ display: round === gameData[0].rounds ? "none" : "block" }}>
+                            Next
+                        </button>
+                        <button
+                            onClick={handleResultsPage}
+                            style={{ display: round === gameData[0].rounds ? "block" : "none" }}>
+                            Done
+                        </button>
                     </div>
-
                 </div>
             }
-
-
-
-
-
-
-
-
-
-
-
-
         </motion.div>
     )
 }

@@ -53,13 +53,14 @@
 
 .gameRound__playersCard {
     height: 70px;
-    width: 90%;
+    width: 100%;
     background-color: rgba(241,243,248, 0.2);
     border-radius: 10px;
     display: flex;
     align-items: center;
-    padding: 0 5%;
+    justify-content: space-between;
     margin-bottom: 5%;
+    
 }
 
 
@@ -75,4 +76,32 @@
 .gameRound__buttons > div > button {
     font-size: 1.5rem;
     
+    
+}
+.gameRound__playerCardName {
+    width: 40%;
+    margin-left: 1rem;
+    overflow: scroll;
+    display: flex;
+    align-items:center;
+    font-size: 0.7rem;
+}
+.gameRound__playerCardTotal {
+    width: 10%
+}
+.gameRound__playerCardScore {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem;
+}
+
+.gameRound__attempt {
+    font-size: 1rem;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    background-color: white;
+    border-radius: 50%;
 }
