@@ -159,14 +159,19 @@ const NewGame = () => {
                                 name="par"
                                 value={gameForm.par}
                                 label="Par Value"
-
+                                pattern="[0-9]" 
+                                inputmode="numeric"
+                                min="1" max="5"
                                 onChange={handleInputChange}
                             />
                             <TextField
                                 style={{ width: "30%" }}
                                 id="rounds"
+                                pattern="[0-9]" 
+                                inputmode="numeric"
                                 type="number"
                                 name="rounds"
+                                min="1" max="30"
                                 value={gameForm.rounds}
                                 label="Rounds"
                                 onChange={handleInputChange}
@@ -177,7 +182,10 @@ const NewGame = () => {
                                 style={{ width: "30%" }}
                                 id="count"
                                 type="number"
+                                pattern="[0-9]" 
+                                inputmode="numeric"
                                 name="playerCount"
+                                min="1" max="10"
                                 value={gameForm.playerCount}
                                 label="Players"
                                 onChange={handleInputChange}

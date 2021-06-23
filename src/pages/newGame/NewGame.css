@@ -1,92 +1,117 @@
 .newGame {
-    background-image: url("../../images/hills2.png");
-    background-color: #3B8C4B;
-    width: 100%;
-    height: 720px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    border-radius: 0 0 5px 5px;
-    display: grid;
-    place-items: center;
+  background-image: url("../../images/hills2.png");
+  background-color: #3b8c4b;
+  width: 100%;
+  height: 720px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 0 0 5px 5px;
+  display: grid;
+  place-items: center;
 }
 
 .newGame__form {
-   display: flex;
-   width: 70%;
-   height: 60%;
-   align-items: space-between;
-   justify-content: space-between;
+  display: flex;
+  width: 70%;
+  height: 60%;
+  align-items: space-between;
+  justify-content: space-between;
 }
 
 .newGame__numberInput {
-    display: flex;
-    justify-content: space-between;
-    margin: 2rem 0 5rem 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 5rem 0;
 }
 
 .newGame__textInput .MuiFormLabel-root {
-    font-size: 1.5rem !important;
+  font-size: 1.5rem !important;
 }
 
 .MuiInputBase-input {
-    height: 2.5rem !important;
-    color: white !important;
-    text-align: center !important;
+  height: 2.5rem !important;
+  color: white !important;
+  text-align: center !important;
 }
 
 .MuiInputBase-root {
-    font-size: 2rem !important;
-    padding-top: 0.5rem;
+  font-size: 2rem !important;
+  padding-top: 0.5rem;
 }
 
-.MuiFormLabel-root{
-    color: orange !important
+.MuiFormLabel-root {
+  color: orange !important;
 }
 
-.MuiFormLabel-root .Mui-focused{
-    color: whitesdf !important
+.MuiFormLabel-root .Mui-focused {
+  color: whitesdf !important;
 }
 
 .MuiInputBase-input:focus {
-   outline-color: white !important
+  outline-color: white !important;
 }
 
 .MuiInput-underline:before {
-    border-bottom: 2px solid lightgray !important;
+  border-bottom: 2px solid lightgray !important;
 }
 .MuiInput-underline:after {
-    border-bottom: 2px solid orange !important;
+  border-bottom: 2px solid orange !important;
 }
 
 .newGame__saveGame {
-    width: 100%;
-    padding-top: 10rem;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  padding-top: 10rem;
+  display: flex;
+  justify-content: center;
 }
 
 .newGame__addPlayersFew {
-    height: 400px;
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  height: 400px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .newGame__addPlayers {
-    height: 350px;
-    margin-bottom: 50px;
-    overflow: scroll;
+  height: 350px;
+  margin-bottom: 50px;
+  overflow: scroll;
 }
 
 .newGame__addPlayer {
-    margin-bottom: 1rem
+  margin-bottom: 1rem;
 }
 
-
-
 .newGame__buttons {
-    width: 100%;
-    display: flex;
-    justify-content:space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 500px) {
+  .newGame {
+    width: 100vw;
+    height: 90vh;
+  }
+  .newGame__saveGame {
+    padding-top: 7rem;
+  }
+
+  .newGame__addPlayersFew {
+    margin-bottom: 0rem;
+  }
+
+  .newGame__addPlayers {
+    height: 350px;
+    margin-bottom: 50px;
+    overflow: scroll;
+  }
+
+  .newGame__buttons > button {
+      font-size: 1.5rem;
+  }
+  .newGame__saveGame > button {
+    font-size: 1.5rem;
+}
 }

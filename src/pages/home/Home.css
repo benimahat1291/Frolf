@@ -81,4 +81,46 @@
   }
 
 
+@media (max-width: 500px) {
+    .home { 
+        width: 100vw;
+        height: 90vh;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .netContainer {
+        position: absolute;
+        top: 30%;
+        left: 250px;
+    }
+
+    @keyframes discToss {
+        0%{
+            left: 0;
+            top: 60%;
+            opacity: 0;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            
+        }
+        20% {
+            opacity: 1;
+        }
+        40%{
+            top: 20%;;
+        }
+    
+        
+        100% {
+          top: 20%;
+          left: 250px;
+          height: 10px;
+          width: 30px;
+          border-radius: 100%;
+    
+        }
+       
+      }
+}
 

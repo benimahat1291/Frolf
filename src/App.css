@@ -17,3 +17,25 @@
     height: 800px;
     border-radius: 5px;
 }
+
+::-webkit-scrollbar {
+    display: none
+    
+}
+
+.MuiFormLabel-root, .MuiInputBase-input  {
+    font-family: 'Play', sans-serif !important;
+
+}
+
+
+@media (max-width: 500px) {
+    .frolferApp { 
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0 0 5px 5px;
+    }
+}
+
+
+

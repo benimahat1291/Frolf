@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Play', sans-serif;
 }
 
 .gameRound__round {
@@ -25,7 +26,7 @@
 .gameRound__roundTracker {
     width: 2rem;
     text-align: center;
-    padding-right: 2rem;
+    padding-right: 3rem;
     align-self: flex-end;
 }
 
@@ -79,7 +80,7 @@
     
 }
 .gameRound__playerCardName {
-    width: 40%;
+    width: 50%;
     margin-left: 1rem;
     overflow: scroll;
     display: flex;
@@ -87,7 +88,6 @@
     font-size: 0.7rem;
 }
 .gameRound__playerCardTotal {
-    width: 10%
 }
 .gameRound__playerCardScore {
     display: flex;
@@ -104,4 +104,24 @@
     align-items:center;
     background-color: white;
     border-radius: 50%;
+}
+
+.gameRound__scoreInput {
+    font-size: 2rem;
+    text-align: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: #397243;
+    color: rgba(241,243,248, 0.7);
+    border: none;
+    font-family: 'Play', sans-serif;
+
+}
+
+@media (max-width: 500px) {
+    .gameRound {
+        width: 100vw;
+        height: 90vh;
+    }
 }

@@ -80,7 +80,7 @@ const GameRounds = () => {
                                 <h1>{player.scores[0].score}</h1>
                             </div>
                             <div className="gameRound__playerCardScore">
-                            <input type="number" pattern="[0-9]" inputmode="numeric" id="quantity" name="quantity" min="0" max="20" value="0"/>
+                            <input className="gameRound__scoreInput" type="number" pattern="[0-9]" inputmode="numeric" id="quantity" name="quantity" min="0" max="20" value="0"/>
                             </div>
                         </div>
                     ))}
